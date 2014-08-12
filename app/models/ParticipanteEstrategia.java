@@ -18,7 +18,7 @@ public class ParticipanteEstrategia {
 
 	@Id 
 	@GeneratedValue
-	protected Long id;
+	private Long id;
 	
 	public ParticipanteEstrategia() {
 	}

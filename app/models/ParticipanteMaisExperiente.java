@@ -74,35 +74,4 @@ public class ParticipanteMaisExperiente extends ParticipanteEstrategia {
 		List<Evento> eventos = dao.findAllByClassName("Evento");
 		return eventos;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((getDescricao() == null) ? 0 : getDescricao().hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof ParticipanteMaisExperiente)) {
-			return false;
-		}
-		ParticipanteMaisExperiente other = (ParticipanteMaisExperiente) obj;
-		if (getDescricao() == null) {
-			if (other.getDescricao() != null) {
-				return false;
-			}
-		} else if (!getDescricao().equalsIgnoreCase(other.getDescricao())) {
-			return false;
-		}
-		return true;
-	}
 }

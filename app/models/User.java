@@ -82,18 +82,24 @@ public class User {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj){
 			return true;
-		if (obj == null)
+		}
+		if (obj == null){
 			return false;
-		if (!(obj instanceof User))
+		}
+		if (!(obj instanceof User)){
 			return false;
+		}
+			
 		User other = (User) obj;
 		if (email == null) {
-			if (other.email != null)
+			if (other.email != null){
 				return false;
-		} else if (!email.equalsIgnoreCase(other.email))
+			}
+		} else if (!email.equalsIgnoreCase(other.email)){
 			return false;
+		}
 		return true;
 	}
 

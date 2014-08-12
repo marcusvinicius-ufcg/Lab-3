@@ -19,8 +19,18 @@ import play.db.jpa.Transactional;
 
 public class Global extends GlobalSettings {
 
-	GenericDAO dao = new GenericDAOImpl();
-
+	private GenericDAO dao = new GenericDAOImpl();
+	private static final int CAPACIDADE_10 = 10;
+	private static final int CAPACIDADE_12 = 12;
+	private static final int CAPACIDADE_20 = 20;
+	
+	private static final int SABADO = 7;
+	private static final int TERCA = 3;
+	private static final int DOMINGO = 1;
+	private static final int DEZEMBRO = 12;
+	private static final int FEVEREIRO = 2;
+	private static final int DIA = 17;
+	private static final int QUINTA = 5;
 	@Override
 	public void onStart(Application arg0) {
 
@@ -62,9 +72,9 @@ public class Global extends GlobalSettings {
 		temas1.add(Tema.PROGRAMACAO);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_WEEK, 7);
+		calendar.add(Calendar.DAY_OF_WEEK, SABADO);
 
-		Local local1 = new Local("Centro de Convenção", "Av. Canal", 20);
+		Local local1 = new Local("Centro de Convenção", "Av. Canal", CAPACIDADE_20);
 		persist(local1);
 		Evento evento1 = new Evento(
 				"Python na mente e coração",
@@ -79,7 +89,7 @@ public class Global extends GlobalSettings {
 		temas2.add(Tema.ELETRONICA);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_WEEK, 3);
+		calendar.add(Calendar.DAY_OF_WEEK, TERCA);
 
 		Evento evento2 = new Evento(
 				"Luta de robôs",
@@ -94,9 +104,9 @@ public class Global extends GlobalSettings {
 		temas3.add(Tema.PROGRAMACAO);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, 1);
+		calendar.add(Calendar.MONTH, DOMINGO);
 
-		Local local2 = new Local("Auditorio", "Facisa", 10);
+		Local local2 = new Local("Auditorio", "Facisa", CAPACIDADE_10);
 		persist(local2);
 
 		Evento evento3 = new Evento(
@@ -112,9 +122,9 @@ public class Global extends GlobalSettings {
 		temas4.add(Tema.PROGRAMACAO);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_WEEK, 12);
+		calendar.add(Calendar.DAY_OF_WEEK, DEZEMBRO);
 
-		Local local3 = new Local("Hotel JK", "Proximo ao Shopping", 12);
+		Local local3 = new Local("Hotel JK", "Proximo ao Shopping", CAPACIDADE_12);
 		persist(local3);
 
 		Evento evento4 = new Evento(
@@ -130,8 +140,8 @@ public class Global extends GlobalSettings {
 		temas5.add(Tema.DESAFIOS);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, 2);
-		calendar.add(Calendar.DAY_OF_WEEK, 3);
+		calendar.add(Calendar.MONTH, FEVEREIRO);
+		calendar.add(Calendar.DAY_OF_WEEK, TERCA);
 
 		Evento evento5 = new Evento(
 				"III Semana da Computação Verde",
@@ -146,10 +156,10 @@ public class Global extends GlobalSettings {
 		temas6.add(Tema.WEB);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_WEEK, 17);
+		calendar.add(Calendar.DAY_OF_WEEK, DIA);
 
 		Local local4 = new Local("Auditorio Jose Faria Nobrega",
-				"Universidade Federal de Campina Grande", 12);
+				"Universidade Federal de Campina Grande", CAPACIDADE_12);
 		persist(local4);
 
 		Evento evento6 = new Evento(
@@ -165,7 +175,7 @@ public class Global extends GlobalSettings {
 		temas7.add(Tema.ARDUINO);
 
 		calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_WEEK, 5);
+		calendar.add(Calendar.DAY_OF_WEEK, QUINTA);
 
 		Evento evento7 = new Evento(
 				"Minicurso Arduino",

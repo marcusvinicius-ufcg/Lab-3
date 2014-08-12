@@ -14,7 +14,7 @@ import views.html.*;
 
 public class Application extends Controller {
 
-	private static GenericDAO	dao	= new GenericDAOImpl();
+	private static GenericDAO dao = new GenericDAOImpl();
 
 	@Transactional
 	public static Result index() {
@@ -71,9 +71,9 @@ public class Application extends Controller {
 
 	private static User criarUser(Form<Cadastro> cadastroForm) {
 		User user = new User();
-		user.setEmail(cadastroForm.get().email);
-		user.setPassword(cadastroForm.get().senha);
-		user.setName(cadastroForm.get().nome);
+		user.setEmail(cadastroForm.get().getEmail());
+		user.setPassword(cadastroForm.get().getSenha());
+		user.setName(cadastroForm.get().getNome());
 		return user;
 	}
 
@@ -91,7 +91,7 @@ public class Application extends Controller {
 			return badRequest(login.render(loginForm));
 		} else {
 			session().clear();
-			User user = getUser(loginForm.get().email);
+			User user = getUser(loginForm.get().getEmail());
 
 			session("email", user.getEmail());
 
@@ -108,7 +108,7 @@ public class Application extends Controller {
 	@Transactional
 	private static boolean autenticacaoFalhou(Form<Login> loginForm) {
 
-		User user = getUser(loginForm.get().email);
+		User user = getUser(loginForm.get().getEmail());
 
 		if (user == null) {
 			flash("success", "Email não cadastrado");
@@ -123,7 +123,7 @@ public class Application extends Controller {
 
 	private static boolean isPasswordValido(Form<Login> loginForm, User user) {
 		Integer hash = Objects.hashCode(user.getEmail(),
-				loginForm.get().password);
+				loginForm.get().getPassword());
 
 		String hashString = String.valueOf(hash);
 
@@ -137,13 +137,46 @@ public class Application extends Controller {
 	}
 
 	public static class Login {
-		public String	email;
-		public String	password;
+		private String	email;
+		private String	password;
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		
+		
 	}
 
 	public static class Cadastro {
-		public String	email;
-		public String	senha;
-		public String	nome;
+		private String	email;
+		private String	senha;
+		private String	nome;
+		
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public String getSenha() {
+			return senha;
+		}
+		public void setSenha(String senha) {
+			this.senha = senha;
+		}
+		public String getNome() {
+			return nome;
+		}
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
 	}
 }
