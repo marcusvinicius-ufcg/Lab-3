@@ -21,7 +21,6 @@ public class ParticipanteEstrategia {
 	private Long id;
 	
 	public ParticipanteEstrategia() {
-		
 	}
 	
 	public String getDescricao() {
