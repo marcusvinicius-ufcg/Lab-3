@@ -1,0 +1,51 @@
+@(form: Form[controllers.Application.Cadastro])
+
+<html>
+    <head>
+        <title>Sign Up</title>
+        <!-- Basics -->
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ 
+    <title>Cadastro</title>
+ 
+    <!-- CSS -->
+ 
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/login/reset.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/login/animate.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/login/main.css")">
+        
+    </head>
+    <body>
+    
+    
+  	<div id="container" style="height: 380px; top: 50%;margin-top: -140px;">
+  	<h3><center>Cadastre-se</center></h3>
+	@helper.form(routes.Application.cadastro) {
+		@if(form.hasGlobalErrors) {
+	    <center><p class="error">
+	        @form.globalError.message
+	    </p></center>
+		}
+	
+		@if(flash.contains("success")) {
+	    <center><p class="success">
+	        @flash.get("success")
+	    </p></center>
+		}		
+       <input type="text" name="email" placeholder="Email" title="Digite seu e-mail" required value="@form("email").value">
+       <input type="text" name="Nome" placeholder="Nome" title="Digite seu nome" required value="@form("nome").value">
+       <input type="password" name="senha" title="Digite sua senha" required placeholder="Password">
+       
+       <div>
+       <input type="submit" value="Cadastrar"></input>
+	}		
+		@helper.form(routes.Application.index) {
+               	 <input type="submit" value="Voltar">
+         		}
+		</div>
+		
+		</div><!--/container-->
+    </body>
+</html>

@@ -1,0 +1,60 @@
+@(user : models.User, evento:models.Evento)
+
+@main(user){
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Meus Eventos Cadastrados</div>
+					<form action="@routes.EventoController.listaInscritos(user.getEmail())" method="post">
+						<div class="panel-body">
+							<div class=" form-group row">
+								<div class="col-md-8">
+									<select name="select-evento" class="form-control">
+										@for(evento <- controllers.EventoController.getEventos(user.getEmail())){
+											<option value="@evento.getId()" >@evento.toString()</option>
+										}
+									</select>
+								</div>
+								<div class="col-md-4">
+								
+									<a href="@routes.Application.index" class="btn btn-danger">Voltar</a>
+									<button type="submit" class="btn btn-primary">Listar Inscritos</button>
+								
+									
+								</div>
+							</div>
+						</div>
+					</form>
+					<div >
+						<table class="table table-hover table-condensed">
+							<thead>
+								<tr align="center">
+									<th width="200" >Nome</th>
+									<th width="200">E-mail</th>						
+						        </tr>
+							</thead>
+							<tbody>
+								@for(participante <- evento.getParticipantes()){
+									
+									@if(evento.getParticipantesAceitos().contains(participante)){
+										<tr class="success">
+											<td width="200">@participante.getNome()</td>
+											<td width="200">@participante.getEmail()</td>
+										</tr>
+									}else{
+										<tr class="danger">
+											<td width="200">@participante.getNome()</td>
+											<td width="200">@participante.getEmail()</td>
+										</tr>
+									}
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}

@@ -1,0 +1,38 @@
+@(local: Form[models.Local], user : models.User)
+
+@import helper._
+
+
+@main(user){
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Insira as Informacoes para cadastrar um Local</div>
+				<div class="panel-body">
+					<form role="form" action="/local/cadastrar" method="post">
+						<div class="form-group div-painel-black">
+										
+							@inputText(local("nome"), '_label -> "Nome", 'class -> "form-control", 'size -> 70, 'placeholder -> "Digite o Nome do Local")
+						
+							@inputText(local("descricao"), 	'_label -> "Descricao", 'class -> "form-control", 'size -> 70, 'placeholder -> "Como Chegar ao Local")
+					
+							@inputText(local("capacidade"), '_label -> "Capacidade", 'class -> "form-control", 'size -> 5, 'placeholder -> "Capacidade de Participantes")
+								
+						</div>
+						<hr>
+						<p align="center">
+							<a href="@routes.Application.index" class="btn btn-danger">Voltar</a>
+							<button type="submit" class="btn btn-success">Cadastrar</button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
+	}

@@ -1,0 +1,46 @@
+@(form: Form[controllers.Application.Login])
+
+<!doctype html>
+ 
+<head>
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ 	<title>Login</title>
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/login/reset.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/login/animate.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/login/main.css")">
+</head>
+ 
+    <!-- Begin Page Content -->
+ 
+    <div id="container">
+    	<h3><center>Login</center></h3>
+ 
+        @helper.form(routes.Application.authenticate) {
+        	@if(form.hasGlobalErrors) { 
+               <center> <p class="error" style="color:#FF0000">
+                    @form.globalError.message
+                </p></center>
+            }
+            
+            @if(flash.contains("success")) {
+                <center><p class="success" style="color:#FF0000">
+                    @flash.get("success")
+                </p></center>
+            }
+            
+            <input type="text" required  title="Digite seu e-mail" name="email" id="email" placeholder="Email" value="@form("email").value">
+            <input type="password" required  title="Digite sua senha" id="password" name="password" placeholder="Senha">
+           <div>
+            <input type="submit" value="Entrar">
+        }
+         		@helper.form(routes.Application.cadastroPage) {
+               	 <input type="submit" value="Cadastrar">
+         		}
+         		</div>
+    </div><!--/ container-->
+ 
+</body>
+ 
+</html>

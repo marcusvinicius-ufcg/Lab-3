@@ -1,0 +1,94 @@
+@(user: models.User)
+
+<div class="container" style="height: 40% !important;height: 100%;">
+	<div class="col-md-12"
+		style="padding: 20px 40px 40px 40px; height: 100%; margin-bottom: 10px; border-radius: 4px; opacity: .9">
+		<div class="row"> 
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4">
+						<h1 style="font-size: 30px; margin-top:0px;">
+							<b>Criar um evento</b>
+						</h1>
+					</div>
+				</div>
+				<div style="height:450px; background-color:white;color:black; padding:10px">		
+					@helper.form(action = routes.EventoController.novo, 'id -> "form-novo-evento") {
+						<div class="col-md-4">
+							<h1 style="font-size: 30px; margin-top:0px;">
+								<b>Temas</b>
+							</h1>
+							
+							<div id='criacao-temas' style="height:100% !important;padding-top:30px;max-height:390px;overflow-x:auto;overflow-y:scroll; " class="list-group">
+								@for(tema <- Tema.values()){
+									<div class="row list-group-item">
+										<input name="temas[]" class="col-md-1" type="checkbox" value="@tema.name">
+										<span class="col-md-5">@tema</span>
+									</div>
+								}
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="panel">
+								<div class="panel-body">
+									<div class="form-group">		
+										<div class=" form-group row">
+											<div class="col-md-8">
+												<input name="titulo" type="text" class="form-control" placeholder="Titulo do evento" maxlength="40">
+											</div>
+												
+											<div class="col-md-4">
+												<input name="data" type="date" class="form-control"  required>
+											</div>
+									  			
+									  	</div>
+				
+									  	<div class=" form-group row">
+									  		<div class="col-md-8">
+												<select name="locale" class="form-control">
+													@for(local <- controllers.EventoController.getLocais()){
+									    				<option value="@local.getId()" >@local.toString()</option>
+									    			}
+												</select>
+											</div>
+												
+											<div class="col-md-4">
+												<a href="@routes.EventoController.abrirCadastroDeLocal()" class="btn btn-primary">Cadastrar Novo Local</a>
+											</div>
+									  	</div>
+									  		
+									  	<div class="form-group row">
+									  		<div class="col-md-12">
+									  			<textarea name="descricao" placeholder="Descricao do evento" class="form-control" rows="6" maxlength="450"></textarea>
+									  		</div>
+									  	</div>
+									
+										<div class="form-group row">
+											<div class="col-md-12">
+												
+												<label for="exampleInputEmail1">Tipo de Evento</label>
+												
+												<select name="estrategia" class="form-control">
+													@for(estrategia <- controllers.EventoController.getStrategias()){
+									    				<option value="@estrategia.getId()" >@estrategia.getDescricao()</option>
+									    			}
+												</select>
+												<input name="administrador" type="text" value="@user.getEmail()" style="visibility:hidden;">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-12">
+												<button type="submit" class="btn btn-success">Criar Evento</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>		
+						</div>
+					}
+				</div> 
+			</div>
+		</div>
+	</div>
+</div>
