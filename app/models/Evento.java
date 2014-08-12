@@ -69,19 +69,18 @@ public class Evento {
 	public Evento(String titulo, String descricao, Date data, List<Tema> temas,
 			String administrador, Local local, ParticipanteEstrategia strategia)
 			throws EventoInvalidoException {
-		setTitulo(titulo);
-		setDescricao(descricao);
-		setData(data);
-		setTemas(temas);
-		setLocal(local);
-		setStrategia(strategia);
-		setAdministrador(administrador);
+		isSetTitulo(titulo);
+		isSetDescricao(descricao);
+		isSetData(data);
+		isSetTemas(temas);
+		isSetLocal(local);
+		isSetStrategia(strategia);
+		isSetAdministrador(administrador);
 	}
 
 
 	private Integer getCapacidade() {
 		return local.getCapacidade();
-
 	}
 
 	public String getTitulo() {
@@ -113,6 +112,10 @@ public class Evento {
 	}
 
 	public void setParticipantes(List<Participante> participantes) {
+		isSetParticipantes(participantes);
+	}
+	
+	private void isSetParticipantes(List<Participante> participantes) {
 		this.participantes = participantes;
 	}
 
@@ -134,14 +137,22 @@ public class Evento {
 	}
 
 	public void setLocal(Local local) {
-		this.local = local;
+		isSetLocal(local);
 	}
 
+	private void isSetLocal(Local local) {
+		this.local = local;
+	}
+	
 	public ParticipanteEstrategia getStrategia() {
 		return strategia;
 	}
 
 	public void setStrategia(ParticipanteEstrategia strategia) {
+		isSetStrategia(strategia);
+	}
+	
+	private void isSetStrategia(ParticipanteEstrategia strategia) {
 		this.strategia = strategia;
 	}
 
@@ -154,6 +165,10 @@ public class Evento {
 	}
 
 	public void setAdministrador(String administrador) {
+		isSetAdministrador(administrador);
+	}
+	
+	private void isSetAdministrador(String administrador) {
 		this.administrador = administrador;
 	}
 
@@ -162,34 +177,60 @@ public class Evento {
 	}
 
 	public void setTitulo(String titulo) throws EventoInvalidoException {
-		if (titulo == null)
+		isSetTitulo(titulo);
+	}
+	
+	private void isSetTitulo(String titulo) throws EventoInvalidoException {
+		if (titulo == null){
 			throw new EventoInvalidoException("Parametro nulo");
-		if (titulo.length() > 40)
+		}
+		if (titulo.length() > TITULO_MAX_LENGTH){
 			throw new EventoInvalidoException("Título longo");
+		}
 		this.titulo = titulo;
 	}
+	
+	
 
 	public void setDescricao(String descricao) throws EventoInvalidoException {
-		if (descricao == null)
+		isSetDescricao(descricao);
+	}
+	
+	private void isSetDescricao(String descricao) throws EventoInvalidoException {
+		if (descricao == null){
 			throw new EventoInvalidoException("Parametro nulo");
-		if (descricao.length() > 450)
+		}
+		if (descricao.length() > DESC_MAX_LENGTH){
 			throw new EventoInvalidoException("Descrição longa");
+		}
 		this.descricao = descricao;
 	}
 
 	public void setData(Date data) throws EventoInvalidoException {
-		if (data == null)
+		isSetData(data);
+	}
+	
+	private void isSetData(Date data) throws EventoInvalidoException {
+		if (data == null){
 			throw new EventoInvalidoException("Parametro nulo");
-		if (data.compareTo(new Date()) < 0)
+		}
+		if (data.compareTo(new Date()) < 0){
 			throw new EventoInvalidoException("Data inválida");
+		}
 		this.data = data;
 	}
 
 	public void setTemas(List<Tema> temas) throws EventoInvalidoException {
-		if (temas == null)
+		isSetTemas(temas);
+	}
+	
+	private void isSetTemas(List<Tema> temas) throws EventoInvalidoException {
+		if (temas == null){
 			throw new EventoInvalidoException("Parametro nulo");
-		if (temas.size() == 0)
+		}
+		if (temas.size() == 0){
 			throw new EventoInvalidoException("Nenhum tema");
+		}
 		this.temas = temas;
 	}
 

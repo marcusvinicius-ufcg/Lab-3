@@ -29,9 +29,9 @@ public class Local {
 
 	public Local(String nome, String descricao, Integer capacidade) {
 		super();
-		setNome(nome);
-		setDescricao(descricao);
-		setCapacidade(capacidade);
+		isSetNome(nome);
+		isSetDescricao(descricao);
+		isSetCapacidade(capacidade);
 	}
 
 	public Local() {
@@ -50,6 +50,10 @@ public class Local {
 	}
 
 	public void setNome(String nome) {
+		isSetNome(nome);
+	}
+	
+	private void isSetNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -58,6 +62,10 @@ public class Local {
 	}
 
 	public void setDescricao(String descricao) {
+		isSetDescricao(descricao);
+	}
+	
+	private void isSetDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
@@ -66,6 +74,10 @@ public class Local {
 	}
 
 	public void setCapacidade(Integer capacidade) {
+		isSetCapacidade(capacidade);
+	}
+	
+	private void isSetCapacidade(Integer capacidade) {
 		this.capacidade = capacidade;
 	}
 

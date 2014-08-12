@@ -42,8 +42,8 @@ public class Participante {
 	
 	public Participante(String nome, String email)
 			throws PessoaInvalidaException {
-		setNome(nome);
-		setEmail(email);
+		isSetNome(nome);
+		isSetEmail(email);
 	}
 
 	public Long getId() {
@@ -59,6 +59,10 @@ public class Participante {
 	}
 
 	public void setNome(String nome) throws PessoaInvalidaException {
+		isSetNome(nome);
+	}
+	
+	private void isSetNome(String nome) throws PessoaInvalidaException {
 		if (nome == null) {
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
@@ -73,6 +77,10 @@ public class Participante {
 	}
 
 	public void setEmail(String email) throws PessoaInvalidaException {
+		isSetEmail(email);
+	}
+	
+	private void isSetEmail(String email) throws PessoaInvalidaException {
 		if (email == null) {
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
