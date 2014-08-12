@@ -110,9 +110,9 @@ public class EventoController extends Controller {
 	@Transactional
 	public static Result abrirCadastroDeLocal() {
 		
-		if (session("email") == null)
+		if (session("email") == null){
 			return ok(login.render(Form.form(Login.class)));
-
+		}
 		User user = getUser(session("email"));
 		
 		return ok(cadastroLocal.render(LOCAL_FORM, user));
@@ -129,9 +129,9 @@ public class EventoController extends Controller {
 
 		Form<Local> localFormRequest = LOCAL_FORM.bindFromRequest();
 
-		if (session("email") == null)
+		if (session("email") == null){
 			return ok(login.render(form(Login.class)));
-
+		}
 		User user = getUser(session("email"));
 		
 		if (localFormRequest.hasErrors()) {
@@ -193,6 +193,4 @@ public class EventoController extends Controller {
 			}
 		}
 	}
-	
-	
 }

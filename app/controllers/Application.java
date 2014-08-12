@@ -19,16 +19,15 @@ public class Application extends Controller {
 	@Transactional
 	public static Result index() {
 
-		if (session("email") == null)
+		if (session("email") == null){
 			return ok(login.render(Form.form(Login.class)));
-
+		}
 		User userLogado = getUser(session("email"));
 
 		return ok(index.render(userLogado));
 	}
 
 	public static Result cadastroPage() {
-		
 		return ok(cadastro.render(Form.form(Cadastro.class)));
 	}
 
