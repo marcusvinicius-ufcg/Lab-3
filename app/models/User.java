@@ -1,7 +1,9 @@
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import play.data.format.Formats.NonEmpty;
 import play.data.validation.Constraints.Required;
@@ -9,23 +11,27 @@ import play.data.validation.Constraints.Required;
 import com.google.common.base.Objects;
 /**
  * Classe Representa um Usuario do Sistema
- * @author Vinicius
+ * 
+ * @author Marcus Vinicius
  *
  */
 @Entity
+@Table(name="USER_TABLE")
 public class User {
 
 	@Id
-	@Required
 	@NonEmpty
+	@Column(name="EMAIL")
 	private String	email;
 
-	@Required
+	@Column(name="NOME")
 	private String	name;
 
-	@Required
+	@Column(name="SENHA")
 	private String	password;
 
+	public User() {
+	}
 	/**
 	 * @return o email do usuario
 	 */
