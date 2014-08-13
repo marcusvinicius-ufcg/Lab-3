@@ -11,7 +11,6 @@ import models.EventoComparator;
 import models.Local;
 import models.Participante;
 import models.ParticipanteEstrategia;
-import models.ParticipanteMaisExperiente;
 import models.Tema;
 import models.User;
 import models.dao.GenericDAO;
@@ -71,8 +70,7 @@ public class EventoController extends Controller {
 			ParticipanteEstrategia strategia = dao.findByEntityId(ParticipanteEstrategia.class, idStartegia);
 			novoEvento.setLocal(local);
 			novoEvento.setStrategia(strategia);
-			dao.persist(novoEvento);
-			dao.flush();
+			salvarObjeto(novoEvento);
 			return redirect(controllers.routes.Application.index());
 		}
 	}
@@ -143,23 +141,14 @@ public class EventoController extends Controller {
 				flash("success", "Local ja cadastrado");
 				return badRequest(cadastroLocal.render(localFormRequest, user));
 			} else {
-				dao.persist(local);
-				dao.flush();
+				salvarObjeto(local);
 			}
 			return redirect(routes.Application.index());
 		}
 	}
 	@Transactional
 	public static List<ParticipanteEstrategia> getStrategias(){
-		List<ParticipanteEstrategia> estrategias = dao.findAllByClassName("ParticipanteEstrategia");
-		
-		if(!estrategias.contains(new ParticipanteEstrategia())){
-			dao.persist(new ParticipanteEstrategia());
-		}
-		if(!estrategias.contains(new ParticipanteMaisExperiente())){
-			dao.persist(new ParticipanteMaisExperiente());
-		}
-		dao.flush();
+	
 		return dao.findAllByClassName("ParticipanteEstrategia");
 	}
 	@Transactional
@@ -179,7 +168,7 @@ public class EventoController extends Controller {
 		
 	}
 	@Transactional
-	public <T> boolean salvarObjeto(Object object){
+	private static <T> boolean salvarObjeto(Object object){
 		List<T> result = dao.findAllByClassName(object.getClass().toString());
 		
 		if(result.contains(object))

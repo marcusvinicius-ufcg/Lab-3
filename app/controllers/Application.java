@@ -56,13 +56,7 @@ public class Application extends Controller {
 	@Transactional
 	private static boolean usuarioCadastrado(User user) {
 		List<User> users = dao.findAllByClassName("User");
-
-		for (User userDao : users) {
-			if (userDao.equals(user)){
-				return true;
-			}
-		}
-		return false;
+		return users.contains(user);
 	}
 
 	public static Result login() {

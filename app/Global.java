@@ -8,6 +8,7 @@ import models.Participante;
 import models.ParticipanteEstrategia;
 import models.ParticipanteMaisExperiente;
 import models.Tema;
+import models.User;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
 import models.exceptions.EventoInvalidoException;
@@ -39,12 +40,6 @@ public class Global extends GlobalSettings {
 			@Override
 			public void invoke() throws Throwable {
 				criarEventosFakes();
-
-				List<Participante> participantes = dao.findAllByClassName("Participante");
-				
-				for (Participante participante : participantes) {
-					System.out.println(participante);
-				}
 			}
 		});
 	}
@@ -60,6 +55,10 @@ public class Global extends GlobalSettings {
 		criarParticipantesFakes();
 		
 		List<Participante> participantes = dao.findAllByClassName("Participante");
+		if(participantes.size() > 12){
+			return;
+		}
+		
 		ParticipanteEstrategia ordem = new ParticipanteEstrategia();
 		ParticipanteMaisExperiente experiente = new ParticipanteMaisExperiente();
 		persist(ordem);
@@ -191,23 +190,29 @@ public class Global extends GlobalSettings {
 
 	@Transactional
 	private void criarParticipantesFakes() throws PessoaInvalidaException {
-		persist(new Participante("Alberto Leca", "alberto_leca@mail.com"));
-		persist(new Participante("Belmifer Linares",
-				"belmifer_linares@mail.com"));
-		persist(new Participante("Celia Rua", "celia_rua@mail.com"));
-		persist(new Participante("Tairine Reis", "tairine_reis@mail.com"));
-		persist(new Participante("Erico Albuquerque",
-				"erico_albuquerque@mail.com"));
-		persist(new Participante("Sonia Gabeira", "sonia_gabeira@mail.com"));
-		persist(new Participante("Rosa Varejao", "rosa_varejao@mail.com"));
-		persist(new Participante("Paula Lousado", "paula_lousado@mail.com"));
-		persist(new Participante("Quiterio Galindo",
-				"quiterio_galindo@mail.com"));
-		persist(new Participante("Deolindo Castello",
-				"deolindo_castello@mail.com"));
-		persist(new Participante("Doroteia Pasos", "doroteia_passos@mail.com"));
-		persist(new Participante("Eugenio Palhares",
-				"eugenio_palhares@mail.com"));
+		persist(new Participante("Alberto Leca", 		"alberto@mail.com"));
+		persist(new Participante("Belmifer Linares",	"linares@mail.com"));
+		persist(new Participante("Celia Rua", 			"celia@mail.com"));
+		persist(new Participante("Tairine Reis", 		"tairine@mail.com"));
+		persist(new Participante("Erico Albuquerque",	"erico@mail.com"));
+		persist(new Participante("Sonia Gabeira", 		"sonia@mail.com"));
+		persist(new Participante("Rosa Varejao", 		"rosa@mail.com"));
+		persist(new Participante("Paula Lousado", 		"paula@mail.com"));
+		persist(new Participante("Quiterio Galindo",	"quiterio@mail.com"));
+		persist(new Participante("Deolindo Castello",	"deolindo@mail.com"));
+		persist(new Participante("Doroteia Pasos", 		"doroteia@mail.com"));
+		persist(new Participante("Eugenio Palhares",	"palhares@mail.com"));
+	}
+	@Transactional
+	private void criarUsers(){
+		List<Participante> participantes = dao.findAllByClassName("Participante");
+		for(Participante participante : participantes){
+			User user = new User();
+			user.setName(participante.getNome());
+			user.setEmail(participante.getEmail());
+			user.setPassword("fest");
+			persist(user);
+		}
 	}
 
 	@Transactional
