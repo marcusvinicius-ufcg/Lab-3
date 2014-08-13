@@ -32,6 +32,8 @@ public class Global extends GlobalSettings {
 	private static final int FEVEREIRO = 2;
 	private static final int DIA = 17;
 	private static final int QUINTA = 5;
+	private static final int TOTAL_PARTICIPANTES_DEFAULT = 12;
+	
 	@Override
 	public void onStart(Application arg0) {
 
@@ -53,11 +55,12 @@ public class Global extends GlobalSettings {
 	private void criarEventosFakes() throws EventoInvalidoException, PessoaInvalidaException {
 		
 		criarParticipantesFakes();
-		
 		List<Participante> participantes = dao.findAllByClassName("Participante");
-		if(participantes.size() > 12){
+		
+		if(participantes.size() > TOTAL_PARTICIPANTES_DEFAULT){
 			return;
 		}
+		criarUsers();
 		
 		ParticipanteEstrategia ordem = new ParticipanteEstrategia();
 		ParticipanteMaisExperiente experiente = new ParticipanteMaisExperiente();
@@ -203,6 +206,7 @@ public class Global extends GlobalSettings {
 		persist(new Participante("Doroteia Pasos", 		"doroteia@mail.com"));
 		persist(new Participante("Eugenio Palhares",	"palhares@mail.com"));
 	}
+
 	@Transactional
 	private void criarUsers(){
 		List<Participante> participantes = dao.findAllByClassName("Participante");

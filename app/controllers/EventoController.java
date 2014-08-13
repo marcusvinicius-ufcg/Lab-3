@@ -171,9 +171,9 @@ public class EventoController extends Controller {
 	private static <T> boolean salvarObjeto(Object object){
 		List<T> result = dao.findAllByClassName(object.getClass().toString());
 		
-		if(result.contains(object))
+		if(result.contains(object)){
 			return false;
-		else{
+		}else{
 			if(dao.persist(object)){
 				dao.flush();
 				return true;

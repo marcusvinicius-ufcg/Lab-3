@@ -34,16 +34,16 @@
 	        @flash.get("success")
 	    </p></center>
 		}		
-       <input type="text" name="email" placeholder="Email" title="Digite seu e-mail" required value="@form("email").value">
-       <input type="text" name="Nome" placeholder="Nome" title="Digite seu nome" required value="@form("nome").value">
-       <input type="password" name="senha" title="Digite sua senha" required placeholder="Password">
+       <input type="text" 	  name="email" placeholder="Email"    title="Digite seu e-mail" required>
+       <input type="text" 	  name="nome"  placeholder="Nome"     title="Digite seu nome"   required>
+       <input type="password" name="senha" placeholder="Password" title="Digite sua senha"  required>
        
        <div>
        <input type="submit" value="Cadastrar"></input>
-	}		
+		}		
 		@helper.form(routes.Application.index) {
-               	 <input type="submit" value="Voltar">
-         		}
+           <input type="submit" value="Voltar">
+        }
 		</div>
 		
 		</div><!--/container-->

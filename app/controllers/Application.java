@@ -86,9 +86,7 @@ public class Application extends Controller {
 		} else {
 			session().clear();
 			User user = getUser(loginForm.get().getEmail());
-
 			session("email", user.getEmail());
-
 			return redirect(routes.Application.index());
 		}
 	}
@@ -145,14 +143,12 @@ public class Application extends Controller {
 		public void setPassword(String password) {
 			this.password = password;
 		}
-		
-		
 	}
 
 	public static class Cadastro {
 		private String	email;
-		private String	senha;
 		private String	nome;
+		private String	senha;
 		
 		public String getEmail() {
 			return email;
