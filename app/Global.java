@@ -81,7 +81,7 @@ public class Global extends GlobalSettings {
 		Evento evento1 = new Evento(
 				"Python na mente e coração",
 				"Neste evento iremos debater e propor soluções para novas releases.",
-				calendar.getTime(), temas1, "celia_rua@mail.com", local1,
+				calendar.getTime(), temas1, "celia@mail.com", local1,
 				experiente);
 		evento1.setParticipantes(participantes);
 		persist(evento1);
@@ -96,7 +96,7 @@ public class Global extends GlobalSettings {
 		Evento evento2 = new Evento(
 				"Luta de robôs",
 				"Traga seu robô feito em arduino e traga para competir com outros.",
-				calendar.getTime(), temas2, "celia_rua@mail.com", local1,
+				calendar.getTime(), temas2, "celia@mail.com", local1,
 				experiente);
 		evento2.setParticipantes(participantes);
 		persist(evento2);
@@ -114,7 +114,7 @@ public class Global extends GlobalSettings {
 		Evento evento3 = new Evento(
 				"IV Olímpiadas de programação da UFCG",
 				"Traga sua equipe e venha competir nessa maratona de programação.",
-				calendar.getTime(), temas3, "celia_rua@mail.com", local2,
+				calendar.getTime(), temas3, "celia@mail.com", local2,
 				experiente);
 		evento3.setParticipantes(participantes);
 		persist(evento3);
@@ -132,7 +132,7 @@ public class Global extends GlobalSettings {
 		Evento evento4 = new Evento(
 				"II Encontro para programadores de Python",
 				"O encontro contará com a participação de um de seus fundadores, inúmeras palestras e maratonas. Não percam!!",
-				calendar.getTime(), temas4, "alberto_leca@mail.com", local3,
+				calendar.getTime(), temas4, "alberto@mail.com", local3,
 				ordem);
 		evento4.setParticipantes(participantes);
 		persist(evento4);
@@ -148,7 +148,7 @@ public class Global extends GlobalSettings {
 		Evento evento5 = new Evento(
 				"III Semana da Computação Verde",
 				"Exiba sua proposta para uma computação mais verde e concorra a diversos prêmios",
-				calendar.getTime(), temas5, "alberto_leca@mail.com", local3,
+				calendar.getTime(), temas5, "alberto@mail.com", local3,
 				ordem);
 		evento5.setParticipantes(participantes);
 		persist(evento5);
@@ -167,7 +167,7 @@ public class Global extends GlobalSettings {
 		Evento evento6 = new Evento(
 				"Web em foco",
 				"Este evento contará com a participação de um dos fundadores da Web, e juntos iremos compartilhar diversas dicas e boas práticas nessa vasta área.",
-				calendar.getTime(), temas6, "belmifer_linares@mail.com",
+				calendar.getTime(), temas6, "linares@mail.com",
 				local4, ordem);
 		evento6.setParticipantes(participantes);
 		persist(evento6);
@@ -182,12 +182,10 @@ public class Global extends GlobalSettings {
 		Evento evento7 = new Evento(
 				"Minicurso Arduino",
 				"Evento destinado a alunos de LOAC, caso sobre vagas iremos disponibilizar em breve",
-				calendar.getTime(), temas7, "eugenio_palhares@mail.com",
+				calendar.getTime(), temas7, "palhares@mail.com",
 				local4, ordem);
 		evento7.setParticipantes(participantes);
-		if (!persist(evento7)) {
-
-		}
+		persist(evento7);
 		criarParticipantesFakes();
 	}
 
@@ -221,8 +219,7 @@ public class Global extends GlobalSettings {
 
 	@Transactional
 	private <T> boolean persist(Object object) {
-		List<T> result = dao.findAllByClassName(object.getClass()
-				.getSimpleName());
+		List<T> result = dao.findAllByClassName(object.getClass().getSimpleName());
 		if (!result.contains(object)) {
 			dao.persist(object);
 			dao.flush();

@@ -70,7 +70,7 @@ public class EventoController extends Controller {
 			ParticipanteEstrategia strategia = dao.findByEntityId(ParticipanteEstrategia.class, idStartegia);
 			novoEvento.setLocal(local);
 			novoEvento.setStrategia(strategia);
-			salvarObjeto(novoEvento);
+			persist(novoEvento);
 			return redirect(controllers.routes.Application.index());
 		}
 	}
@@ -141,7 +141,7 @@ public class EventoController extends Controller {
 				flash("success", "Local ja cadastrado");
 				return badRequest(cadastroLocal.render(localFormRequest, user));
 			} else {
-				salvarObjeto(local);
+				persist(local);
 			}
 			return redirect(routes.Application.index());
 		}
@@ -160,7 +160,7 @@ public class EventoController extends Controller {
 	@Transactional
 	public static Result abrirMeusEventos(String email){
 		List<Evento> evento = getEventos(email);
-		if(evento == null || evento.size() == 0 || evento.size() > 1){
+		if(evento == null || evento.size() == 0){
 			return Application.index();
 		}else{
 			return ok(meusEventos.render(getUser(email), evento.get(0)));
@@ -168,18 +168,14 @@ public class EventoController extends Controller {
 		
 	}
 	@Transactional
-	private static <T> boolean salvarObjeto(Object object){
-		List<T> result = dao.findAllByClassName(object.getClass().toString());
-		
-		if(result.contains(object)){
+	private static <T> boolean persist(Object object) {
+		List<T> result = dao.findAllByClassName(object.getClass().getSimpleName());
+		if (!result.contains(object)) {
+			dao.persist(object);
+			dao.flush();
+			return true;
+		} else {
 			return false;
-		}else{
-			if(dao.persist(object)){
-				dao.flush();
-				return true;
-			}else{
-				return false;
-			}
 		}
 	}
 }
