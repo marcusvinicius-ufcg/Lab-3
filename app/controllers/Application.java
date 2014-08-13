@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import com.google.common.base.Objects;
+
 import models.User;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -15,7 +16,8 @@ import views.html.*;
 public class Application extends Controller {
 
 	private static GenericDAO dao = new GenericDAOImpl();
-
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static final int MAX_LENGTH = 70;
 	@Transactional
 	public static Result index() {
 
@@ -46,7 +48,13 @@ public class Application extends Controller {
 			if (usuarioCadastrado(user)) {
 				flash("success", "Email já cadastrado");
 				return badRequest(cadastro.render(cadastroForm));
-			} else {
+			} else if(!user.getEmail().matches(EMAIL_PATTERN)){
+				flash("success", "Email Invalido!");
+				return badRequest(cadastro.render(cadastroForm));
+			}else if(user.getEmail().length() > MAX_LENGTH ){
+				flash("success", "Email Longo!");
+				return badRequest(cadastro.render(cadastroForm));
+			}else {
 				salvarNoBD(user);
 			}
 			return redirect(routes.Application.index());

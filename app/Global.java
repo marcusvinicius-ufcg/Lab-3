@@ -18,6 +18,11 @@ import play.GlobalSettings;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 
+/**
+ * Classe Global Instancia Objetos e Salva no Banco de Dados
+ * @author Marcus Vinicius
+ *
+ */
 public class Global extends GlobalSettings {
 
 	private GenericDAO dao = new GenericDAOImpl();
